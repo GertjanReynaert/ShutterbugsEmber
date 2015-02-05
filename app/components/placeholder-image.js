@@ -18,7 +18,7 @@ export default Ember.Component.extend({
   ],
 
   xsmall: 20,
-  small: 64,
+  small: 50,
   medium: 150,
   large: 250,
   xlarge: 500,
@@ -28,6 +28,8 @@ export default Ember.Component.extend({
       // square
       // landscape
       // portrait
+  //check original ratio of image
+    //do some smart stuff
 
   w: function() {
     var width = this.get("width");
