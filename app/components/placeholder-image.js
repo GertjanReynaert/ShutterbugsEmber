@@ -23,8 +23,6 @@ export default Ember.Component.extend({
   large: 250,
   xlarge: 500,
 
-  default_url: "data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=",
-
   // style
     // change ratio of width vs height
       // square
@@ -104,17 +102,15 @@ export default Ember.Component.extend({
       $.getJSON('http://uifaces.com/api/v1/random').then(function(json) {
         this.set("url",json.image_urls.epic);
       }.bind(this));
-    } else {
-      for(var i = 0; i < unsplash.length; i++) {
-        var image = unsplash[i];
-        if (image.keywords.indexOf(this.get("type")) > -1) {
-          this.set("url", image.url);
-          break;
-        }
-      }
+    } else if(this.get("type")) {
+      var matches = unsplash.filter(function(element) {
+        return element.keywords.indexOf(this.get("type")) > -1;
+      }.bind(this));
+     var match = matches[Math.floor(Math.random()*matches.length)];
+     return match.url;
     }
 
-    return this.get("default_url");
+     return unsplash[Math.floor(Math.random()*unsplash.length)].url;
   }.property("type")
 });
 
@@ -169,11 +165,11 @@ var unsplash = [{
 }, {
   id: 13,
   url: "https://ununsplash.imgix.net/reserve/yzu1CGEoRQ6IE7yj8rc9_IMG_8812%20copy.jpg?q=75&fm=jpg&s=8dbbf6d023b5f6cdbef2f585074feaae",
-  keywords: ["nature"]
+  keywords: ["industry"]
 }, {
   id: 14,
   url: "https://unsplash.imgix.net/photo-1418226970361-9f1f7227d638?q=75&fm=jpg&s=4a5f190c7499eff6f7c77d88d8abf57e",
-  keywords: ["nature"]
+  keywords: ["nature", "animals"]
 }, {
   id: 15,
   url: "https://unsplash.imgix.net/photo-1417444900330-dc44c79af021?q=75&fm=jpg&s=691e51ea2e210a16c23294a029752141",
@@ -185,7 +181,7 @@ var unsplash = [{
 }, {
   id: 17,
   url: "https://unsplash.imgix.net/uploads/1413386993023a925afb4/4e769802?q=75&fm=jpg&s=84dfb097d39ff1600cdd32be44813650",
-  keywords: ["nature"]
+  keywords: ["nature", "animals"]
 }, {
   id: 18,
   url: "https://ununsplash.imgix.net/uploads/14132599381062b4d4ede/3b6f33f2?q=75&fm=jpg&s=ada04fb565c23d9c0a3c17c4ca55213d",
