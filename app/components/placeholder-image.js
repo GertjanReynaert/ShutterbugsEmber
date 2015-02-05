@@ -100,16 +100,21 @@ export default Ember.Component.extend({
   }.property('style'),
 
   url: function() {
-    if (this.get("type") === "avatar") {
+    var type = this.get("type");
+    if (type === "avatar") {
       $.getJSON('http://uifaces.com/api/v1/random').then(function(json) {
         this.set("url",json.image_urls.epic);
       }.bind(this));
-    } else if(this.get("type")) {
-      var matches = unsplash.filter(function(element) {
-        return element.keywords.indexOf(this.get("type")) > -1;
+    } else if(type) {
+      $.getJSON('http://www.splashbase.co/api/v1/images/search?query=' + type).then(function(json) {
+        console.log("images for query (" + type + "): " + json);
+        this.set("url",json);
       }.bind(this));
-     var match = matches[Math.floor(Math.random()*matches.length)];
-     return match.url;
+    } else {
+      $.getJSON('http://www.splashbase.co/api/v1/images/random').then(function(json) {
+        console.log("random image: " + json);
+        this.set("url",json.large_url);
+      }.bind(this));
     }
 
      return unsplash[Math.floor(Math.random()*unsplash.length)].url;
