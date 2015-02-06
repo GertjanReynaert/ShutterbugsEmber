@@ -68,7 +68,7 @@ export default Ember.Component.extend({
   }.property('styleKeywords'),
 
   centered: function() {
-    return this.get('styleKeywords').indexOf("center") > -1;
+    return this.get('styleKeywords').indexOf("centered") > -1;
   }.property('styleKeywords'),
 
   circle: function() {
