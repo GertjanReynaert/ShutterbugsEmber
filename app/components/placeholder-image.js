@@ -64,19 +64,19 @@ export default Ember.Component.extend({
   }.property("w", "h"),
 
   rounded: function() {
-    return this.get('keywords').indexOf("rounded") > -1;
+    return this.get('styleKeywords').indexOf("rounded") > -1;
   }.property('styleKeywords'),
 
   centered: function() {
-    return this.get('keywords').indexOf("center") > -1;
+    return this.get('styleKeywords').indexOf("center") > -1;
   }.property('styleKeywords'),
 
   circle: function() {
-    return this.get('keywords').indexOf("circle") > -1;
+    return this.get('styleKeywords').indexOf("circle") > -1;
   }.property('styleKeywords'),
 
   thumbnail: function() {
-    return this.get('keywords').indexOf("thumbnail") > -1;
+    return this.get('styleKeywords').indexOf("thumbnail") > -1;
   }.property('styleKeywords'),
 
   styleKeywords: function() {
