@@ -64,39 +64,27 @@ export default Ember.Component.extend({
   }.property("w", "h"),
 
   rounded: function() {
-    var style = this.get("style") || "";
-    var keywords = style.split(" ");
-    keywords = keywords.map(function(keyword) {
-      return keyword.toLowerCase();
-    });
-    return keywords.indexOf("rounded") > -1;
-  }.property('style'),
+    return this.get('keywords').indexOf("rounded") > -1;
+  }.property('styleKeywords'),
 
   centered: function() {
-    var style = this.get("style") || "";
-    var keywords = style.split(" ");
-    keywords = keywords.map(function(keyword) {
-      return keyword.toLowerCase();
-    });
-    return keywords.indexOf("center") > -1;
-  }.property('style'),
+    return this.get('keywords').indexOf("center") > -1;
+  }.property('styleKeywords'),
 
   circle: function() {
-    var style = this.get("style") || "";
-    var keywords = style.split(" ");
-    keywords = keywords.map(function(keyword) {
-      return keyword.toLowerCase();
-    });
-    return keywords.indexOf("circle") > -1;
-  }.property('style'),
+    return this.get('keywords').indexOf("circle") > -1;
+  }.property('styleKeywords'),
 
   thumbnail: function() {
+    return this.get('keywords').indexOf("thumbnail") > -1;
+  }.property('styleKeywords'),
+
+  styleKeywords: function() {
     var style = this.get("style") || "";
     var keywords = style.split(" ");
-    keywords = keywords.map(function(keyword) {
+    return keywords.map(function(keyword) {
       return keyword.toLowerCase();
     });
-    return keywords.indexOf("thumbnail") > -1;
   }.property('style'),
 
   url: function() {
