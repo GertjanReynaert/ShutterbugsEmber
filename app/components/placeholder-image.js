@@ -111,15 +111,19 @@ export default Ember.Component.extend({
   }.property("type"),
 
   image_for_type: function() {
-    $.getJSON('http://www.splashbase.co/api/v1/images/search?query=' + this.get("type")).then(function(json) {
-      console.log("images for query (" + this.get("type") + "): " + json);
-      this.set("url",json);
+    var proxy = 'https://jsonp.nodejitsu.com/?callback=?&url=';
+    var url = proxy + 'http://www.splashbase.co/api/v1/images/search?query=' + this.get("type");
+    $.getJSON(url).then(function(json) {
+      var arr = json.images;
+      var img = arr[Math.floor(Math.random()*arr.length)];
+      this.set("url",img.large_url);
     }.bind(this));
   }.property("type"),
 
   random_image: function() {
-    $.getJSON('http://www.splashbase.co/api/v1/images/random').then(function(json) {
-      console.log("random image: " + json);
+    var proxy = 'https://jsonp.nodejitsu.com/?callback=?&url=';
+    var url = proxy + 'http://www.splashbase.co/api/v1/images/random';
+    $.getJSON(url).then(function(json) {
       this.set("url",json.large_url);
     }.bind(this));
   }.property("type"),
