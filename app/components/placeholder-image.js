@@ -23,6 +23,9 @@ export default Ember.Component.extend({
   large: 250,
   xlarge: 500,
 
+
+  typeworkLogo: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAD6BAMAAAB6wkcOAAAAHlBMVEU/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8RLl7PAAAACXRSTlMAQE2QrODl5ugIN0RyAAAAtUlEQVR42u3dMRGAMBAAwccBKkAAOIgGZqjpaPGABiZuadPS5Cn2DKyEi6nmdcSZqD9RM6PT6XQ6nU6n0+l0Op1Op3/Sy9K2dtbHaBvodDqdTqfT6XQ6nU6n0+l0Op1Op9PpdDqdTqfT6XQ6nf4r/d7a9s56t+h0Op1Op9PpdDqdTqfT6XQ6nU6n0+l0Op1Op9PpdDqdTqfT6XQ6nU6n0+l0Op1Op9PpdDqdTqcn67lH5jlRv14zAEBWshvDNAAAAABJRU5ErkJggg==",
+
   // style
     // change ratio of width vs height
       // square
@@ -101,7 +104,7 @@ export default Ember.Component.extend({
       this.get("random_image");
     }
 
-     return unsplash[Math.floor(Math.random()*unsplash.length)];
+    return this.get("typeworkLogo");
   }.property("type"),
 
   avatar: function() {
@@ -124,31 +127,7 @@ export default Ember.Component.extend({
     var proxy = 'https://jsonp.nodejitsu.com/?callback=?&url=';
     var url = proxy + 'http://www.splashbase.co/api/v1/images/random';
     $.getJSON(url).then(function(json) {
-      this.set("url",json.large_url);
+      this.set("url",json.large_url || json.url);
     }.bind(this));
   }.property("type"),
 });
-
-var unsplash = [
-  "https://ununsplash.imgix.net/photo-1422479516648-9b1f0b6e8da8?q=75&fm=jpg&s=c5f2b3df2a4c71532b3b354b8766503c",
-  "https://ununsplash.imgix.net/photo-1415302199888-384f752645d0?q=75&fm=jpg&s=823bdcc1b7ad955f5180efd352561016",
-  "https://ununsplash.imgix.net/reserve/r0r252VR6WqPRsxngGUE_telefoon%20politie.jpg?q=75&fm=jpg&s=30a261ce928af70d4f9a3fe0cf394bc3",
-  "https://ununsplash.imgix.net/photo-1413896235942-39c2eb7cd584?q=75&fm=jpg&s=82734c02c2c6a780dc31f24c54077dd6",
-  "https://ununsplash.imgix.net/uploads/14127101912749510b8ed/82743738?q=75&fm=jpg&s=2150993787c74416103059d6ebac09f5",
-  "https://ununsplash.imgix.net/photo-1413912623716-e6c688db0383?q=75&fm=jpg&s=2777ec88322e8725978f0fa956735021",
-  "https://ununsplash.imgix.net/reserve/yzu1CGEoRQ6IE7yj8rc9_IMG_8812%20copy.jpg?q=75&fm=jpg&s=8dbbf6d023b5f6cdbef2f585074feaae",
-  "https://ununsplash.imgix.net/reserve/r0r252VR6WqPRsxngGUE_telefoon%20politie.jpg?q=75&fm=jpg&s=30a261ce928af70d4f9a3fe0cf394bc3",
-  "https://ununsplash.imgix.net/reserve/TxbDzeAhRmCwa6DDrbOQ_kazan-big.jpg?q=75&fm=jpg&s=01c1d06b45220391463a24a148be620f",
-  "https://ununsplash.imgix.net/reserve/yzu1CGEoRQ6IE7yj8rc9_IMG_8812%20copy.jpg?q=75&fm=jpg&s=8dbbf6d023b5f6cdbef2f585074feaae",
-  "https://ununsplash.imgix.net/photo-1413913619092-816734eed3a7?q=75&fm=jpg&s=7653dd05ea22b7546a416b360b9d3bdd",
-  "https://ununsplash.imgix.net/uploads/14132599381062b4d4ede/3b6f33f2?q=75&fm=jpg&s=ada04fb565c23d9c0a3c17c4ca55213d",
-  "https://ununsplash.imgix.net/uploads/141202616623001715bb7/c1b3b9b0?q=75&fm=jpg&s=07faf9fb6409579bda59881970b284d1",
-  "https://ununsplash.imgix.net/reserve/e66NHyUFQx6lNahLbW6g_IMG_2536_2.jpg?q=75&fm=jpg&s=0defcec221eb9aa0b686b9d78ac0053c",
-  "https://unsplash.imgix.net/photo-1414005987108-a6d06de8769f?q=75&fm=jpg&s=b37798a9dbd0c8884af2261b518970e3",
-  "https://unsplash.imgix.net/photo-1416184008836-5486f3e2cf58?q=75&fm=jpg&s=1168eb53b941d6e992595864a3771f7a",
-  "https://unsplash.imgix.net/reserve/nTr1589kTgyXCOdStCGm_MikaRuusunen.jpg?q=75&fm=jpg&s=ebc5195bf9546b2a2f21d8df6fd40fe1",
-  "https://unsplash.imgix.net/photo-1418226970361-9f1f7227d638?q=75&fm=jpg&s=4a5f190c7499eff6f7c77d88d8abf57e",
-  "https://unsplash.imgix.net/photo-1417444900330-dc44c79af021?q=75&fm=jpg&s=691e51ea2e210a16c23294a029752141",
-  "https://unsplash.imgix.net/uploads/1413386993023a925afb4/4e769802?q=75&fm=jpg&s=84dfb097d39ff1600cdd32be44813650",
-  "https://unsplash.imgix.net/reserve/URG2BbWQQ9SAcqLuTOLp_BP7A9947.jpg?q=75&fm=jpg&s=604dc379bd8749d90ca2b9c8ec270f63",
-];
