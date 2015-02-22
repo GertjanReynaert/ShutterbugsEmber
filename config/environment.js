@@ -25,6 +25,12 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.contentSecurityPolicy = {
+      'default-src': "'none'",
+      'img-src': "'self' https://s3.amazonaws.com https://*.s3.amazonaws.com data:",
+      'connect-src': "'self' http://uifaces.com http://www.splashbase.co",
+      'script-src': "'self' https://jsonp.nodejitsu.com "
+    };
   }
 
   if (environment === 'test') {
